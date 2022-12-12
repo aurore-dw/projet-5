@@ -27,7 +27,6 @@ try
             $contact = $display->displFormulContact(); 
         }
 
-
         // Ajout membre 
         if ($_GET['action'] == 'addMember') {
             if (isset($_POST['username'])  AND isset($_POST['mail']) AND isset($_POST['password']) AND isset($_POST['confirmpassword'])) { 
@@ -55,6 +54,18 @@ try
                     echo '<p style= "border: 1px solid red; text-align: center; font-size: 25px; margin: 90px 90px 90px;">Tous les champs doivent être complétés !</p>';
                 }
             }
+        }
+
+        //Affichage formulaire de connexion
+        if ($_GET['action'] == 'displConnexion') {
+        $display = new ControllerUser();
+            $contact = $display->displConnexion(); 
+        }
+
+        //Deconnexion
+         if ($_GET['action'] == 'deconnexion') {
+        $deconnex = new ControllerUser();
+            $newdeconnex = $deconnex->deconnexion();
         }
 
 	

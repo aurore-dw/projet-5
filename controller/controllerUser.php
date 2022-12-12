@@ -35,4 +35,38 @@ class ControllerUser
         }
     }
 
+    //Connexion
+    public function connexion($username,$password) 
+    {
+       $membre = new MembersManager();
+       $connect = $membre->getConnect($username);
+       $isPasswordCorrect = password_verify($_POST['password'], $connect['password']);
+
+       if (!$connect)
+       {
+          echo 'Mauvais identifiant ou mot de passe !';
+       }
+       else{
+          if ($isPasswordCorrect) {
+             session_start();
+             $_SESSION['user_id'] = $connect['user_id'];
+             $_SESSION['username'] = $username;
+             $_SESSION['droits'] = $connect['droits'];
+             header("Location: index.php");
+
+          }else{
+             echo 'Mauvais identifiant ou mot de passe !';
+          } 
+       } 
+    }
+
+    //Déconnexion
+    public function deconnexion()
+    {
+       session_start();
+       $_SESSION = array();
+       session_destroy();
+       header("Location: index.php"); 
+    }
+
 }
