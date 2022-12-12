@@ -38,6 +38,16 @@ class MembersManager extends Manager
 		$mailexist = $reqmail->rowCount();
 		return $mailexist;
 	}
+	
+	//Connexion
+	public function getConnect($username)
+	{
+		$db = $this->dbConnect();
+		$req = $db->prepare('SELECT * FROM user WHERE username = ?');
+		$req->execute(array($username));
+		
+		return $req->fetch();
+	}
 
 
 
