@@ -98,6 +98,20 @@ try
         }    
       }
 
+      //Affichage liste des articles Admin
+        if ($_GET['action'] == 'listArticlesAdmin')
+        {
+            if (!isset($_SESSION['droits']) || ($_SESSION['droits'] == 0))
+            { //Condition de sécurité pour éviter d'accéder à l'interface Admin par l'URL
+                header('Location: index.php');
+            }
+            else
+            {
+              $listarticlesAdmin = new ControllerAdmin();
+              $list = $listarticlesAdmin->listArticlesAdmin();
+            }
+        }
+
 	
 
 }else { //Si aucune action, affiche la page d'accueil 

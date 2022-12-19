@@ -30,6 +30,14 @@ class ControllerAdmin
 	   }
     }
 
+    //Affichage de la liste des posts Admin
+    public function listArticlesAdmin() 
+    {
+	   $postManager = new PostManager();
+	   $posts = $postManager->getArticlesAdmin();
+	   require_once('view/backend/listArticlesAdmin.php');
+    }
+
    
 
 
