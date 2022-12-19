@@ -7,6 +7,7 @@ use Models\Manager;
 
 use Controllers\ControllerAccueil;
 use Controllers\ControllerUser;
+use Controllers\ControllerAdmin;
 
 class MembersManager extends Manager
 {
