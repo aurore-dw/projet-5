@@ -6,6 +6,7 @@ require 'vendor/autoload.php';
 
 use Models\Manager;
 use Models\MembersManager;
+use Models\PostManager;
 
 class ControllerUser
 {
@@ -67,6 +68,14 @@ class ControllerUser
        $_SESSION = array();
        session_destroy();
        header("Location: index.php"); 
+    }
+
+    //Affichage de tous les articles User
+    public function listAllArticles()
+    {
+        $allPosts = new PostManager();
+        $articles = $allPosts->getAllArticles();
+        require('view/frontend/listArticlesView.php');
     }
 
 }
