@@ -38,6 +38,28 @@ class ControllerAdmin
 	   require_once('view/backend/listArticlesAdmin.php');
     }
 
+    //Récupération d'un post admin par id
+    public function chapitAdmin() 
+    { 	
+	   $postManager = new PostManager();
+	   $post = $postManager->getArticle($_GET['id']);
+	
+	   require('view/backend/editArticleAdmin.php');
+    }
+
+    //Modification d'un post
+    public function editArticle($title, $chapo, $content, $postId) 
+    {
+	   $artModif = new PostManager();
+	   $artOk = $artModif->updateArticle($title, $chapo, $content, $postId);
+	
+	   if($artOk === false) {
+		  die('<p style= "border: 1px solid red; text-align: center; font-size: 55px; margin: 90px 90px 90px;" Impossible de modifier un chapitre.</p>');
+	   }else{
+		  header('Location: index.php?action=listArticlesAdmin');
+	   }
+    }
+
    
 
 

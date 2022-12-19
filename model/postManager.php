@@ -32,4 +32,24 @@ class PostManager extends Manager
 		return $articles;
 	}
 
+	//Recupère un article par son id (Admin)
+	public function getArticle($dataId)
+    {
+    	$db = $this->dbConnect();
+    	$req = $db->prepare('SELECT * FROM posts WHERE post_id = ?');
+		$req->execute(array($dataId));
+	
+    	return $req;
+	}
+
+	//Modifie un article (Admin)
+	public function updateArticle($title, $chapo, $content, $postId) 
+	{
+		$db = $this->dbConnect();
+		$updArt = $db->prepare('UPDATE posts SET title = ?, chapo = ?, content = ?, creation_date = NOW() WHERE post_id = ?');
+        $artOk = $updArt->execute(array($title, $chapo, $content, $postId));
+        	
+		return $artOk;
+	}
+
 }
