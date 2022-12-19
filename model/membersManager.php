@@ -16,7 +16,7 @@ class MembersManager extends Manager
 
 	{
 		$db = $this->dbConnect();
-		$insertmbr = $db->prepare('INSERT INTO user (username, mail, password, droits) VALUES(?, ?, ?, 0)');
+		$insertmbr = $db->prepare('INSERT INTO users (username, mail, password, droits) VALUES(?, ?, ?, 0)');
 		$insertmbr->execute(array(
 			$username,
 			$mail,
@@ -31,7 +31,7 @@ class MembersManager extends Manager
 
 	{
 		$db = $this->dbConnect();
-		$reqmail = $db->prepare("SELECT * FROM user WHERE mail = ?");
+		$reqmail = $db->prepare("SELECT * FROM users WHERE mail = ?");
 		$reqmail->execute(array(
 			$mail
 		));
@@ -43,7 +43,7 @@ class MembersManager extends Manager
 	public function getConnect($username)
 	{
 		$db = $this->dbConnect();
-		$req = $db->prepare('SELECT * FROM user WHERE username = ?');
+		$req = $db->prepare('SELECT * FROM users WHERE username = ?');
 		$req->execute(array($username));
 		
 		return $req->fetch();
