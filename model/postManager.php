@@ -22,4 +22,14 @@ class PostManager extends Manager
 
 	}
 
+	//Récupération de tous les chapitres rangés en ordre d'id descendante
+	public function getArticlesAdmin() 
+	{
+		
+		$db = $this->dbConnect();
+		$articles = $db->query('SELECT * FROM posts ORDER BY post_id DESC');
+
+		return $articles;
+	}
+
 }
