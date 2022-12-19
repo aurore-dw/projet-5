@@ -5,9 +5,11 @@ require 'vendor/autoload.php';
 
 use Controllers\ControllerAccueil;
 use Controllers\ControllerUser;
+use Controllers\ControllerAdmin;
 
 use Models\Manager;
 use Models\MembersManager;
+use Models\PostManager;
 
 
 try 
@@ -67,6 +69,34 @@ try
         $deconnex = new ControllerUser();
             $newdeconnex = $deconnex->deconnexion();
         }
+
+        //Affiche l'interface de redaction de chapitre Admin
+        if ($_GET['action'] == 'editoInterfaceAdmin') {
+          if(!isset($_SESSION['username']) ||($_SESSION['droits'] == 0)){
+            pageAccueil();
+        }else{
+            if (isset($_SESSION) && $_SESSION['droits'] == '1'){
+              $affInterface = new ControllerAdmin();
+              $interface = $affInterface->editoInterfaceAdmin();
+            } 
+        }
+    }
+
+        //Redaction articles Admin
+      if ($_GET['action'] == 'writeArticle') {
+        if(isset($_SESSION['user_id']) and isset($_POST['title']) and isset($_POST['chapo']) and isset($_POST['content'])) {
+          $title = ($_POST['title']);
+          $content = ($_POST['content']);
+          $idUser = ($_SESSION['user_id']);
+          $chapo = ($_POST['chapo']);
+            if (!empty(trim($_POST['title'])) and !empty(trim($_POST['chapo'])) and !empty(trim($_POST['content']))){
+              $redacArticle = new ControllerAdmin();
+              $aff = $redacArticle->writeArticle($_SESSION['user_id'], $_POST['title'], $_POST['chapo'], $_POST['content']);  
+            }else{
+                throw new Exception('Vous n\'avez pas saisi d\'article !');
+              }
+        }    
+      }
 
 	
 
