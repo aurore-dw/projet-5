@@ -142,6 +142,12 @@ try
             }
         }
 
+        //Affiche la liste complète des articles User
+        if ($_GET['action'] == 'listAllArticles') {
+            $allArticles = new ControllerUser;
+            $all = $allArticles->listAllArticles();
+        }
+
 	
 
 }else { //Si aucune action, affiche la page d'accueil 

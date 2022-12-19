@@ -52,4 +52,14 @@ class PostManager extends Manager
 		return $artOk;
 	}
 
+	//Reccupère tous les articles pour les afficher dans la vue (User)
+	public function getAllArticles()
+	{
+		$db = $this->dbConnect();
+		$req = $db->query('SELECT * FROM posts INNER JOIN users ON posts.user_id = users.user_id ORDER BY creation_date DESC LIMIT 0, 50');
+
+		return $req;
+
+	}
+
 }
