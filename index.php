@@ -112,6 +112,36 @@ try
             }
         }
 
+        //Affiche un chapitre à modifier Admin
+        if ($_GET['action'] == 'chapitAdmin') {
+            if (!isset($_SESSION['droits']) || ($_SESSION['droits'] == 0)){
+                header('Location: index.php');
+            }else{
+                if (isset($_GET['id']) && $_GET['id'] > 0) {
+                    $controlleradmin = new ControllerAdmin();
+                    $affiche = $controlleradmin->chapitAdmin();
+                }else {
+                    echo '<p style= "border: 1px solid red; text-align: center; font-size: 25px; margin: 90px 90px 90px;">Petit problème d\'affichage du post !</p>';
+                }
+            }   
+        }
+
+    //Modifie article Admin
+        if ($_GET['action'] == 'editArticle')
+        {
+            if (!isset($_SESSION['droits']) || ($_SESSION['droits'] == 0)){ 
+            ////Condition de sécurité pour éviter d'accéder à l'interface Admin par l'URL
+                header('Location: index.php');
+            }else{
+                if ((isset($_GET['id'])) && (!empty($_GET['id']))){
+                    $controlleradmin = new ControllerAdmin();
+                    $modifier = $controlleradmin->editArticle($_POST['title'], $_POST['chapo'], $_POST['content'], $_GET['id']); 
+                }else{
+                    throw new Exception('Impossible de modifier l\'article !');
+                }
+            }
+        }
+
 	
 
 }else { //Si aucune action, affiche la page d'accueil 
