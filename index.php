@@ -216,6 +216,19 @@ try
             }
         }
 
+        //Supprime un commentaire Admin
+        if ($_GET['action'] == 'delComment'){
+            if (!isset($_SESSION['droits']) || ($_SESSION['droits'] == 0)){
+             ////Condition de sécurité pour éviter d'accéder à l'interface Admin par l'URL
+                header('Location: index.php');
+            }else{
+                if ((isset($_GET['id'])) && (!empty($_GET['id']))){
+                    $controlleradmin = new ControllerAdmin();
+                    $supprimer = $controlleradmin->delComment($_GET['id']);
+                }
+            }
+        }
+
 	
 
 }else { //Si aucune action, affiche la page d'accueil 

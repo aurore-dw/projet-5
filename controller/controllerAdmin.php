@@ -99,13 +99,20 @@ class ControllerAdmin
         }
     }
 
-   
+    // Supprimme un commentaire signalé
+    public function delComment($commentId)
+    {
+        $delete = new CommentManager();
+        $deletedComment = $delete->deleteComment($commentId);
 
-
-
-
-
-
-
+        if ($deletedComment === false)
+        {
+            throw new \Exception('Impossible de supprimer ce commentaire !');
+        }
+        else
+        {
+            header('Location: index.php?action=getCommentAdmin&moderation=1');
+        }
+    }
 	
 }
