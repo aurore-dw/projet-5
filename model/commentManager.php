@@ -20,4 +20,14 @@ class CommentManager extends Manager
 		return $comments;
 	}
 
+	//Ajout de commentaire
+	public function postComment($idArticle, $author, $comment)
+	{
+    	$db = $this->dbConnect();
+    	$comments = $db->prepare('INSERT INTO comments (post_id, author, comment, comment_date, moderation) VALUES(?, ?, ?, NOW(), 1)');
+    	$affectedLines = $comments->execute(array($idArticle, $author, $comment));
+
+    	return $affectedLines;
+	}
+
 }

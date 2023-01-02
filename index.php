@@ -10,6 +10,7 @@ use Controllers\ControllerAdmin;
 use Models\Manager;
 use Models\MembersManager;
 use Models\PostManager;
+use Models\CommentManager;
 
 
 try 
@@ -168,6 +169,22 @@ try
                 $affichageArticle = $artic->affArticle($_GET['id']);
             }else{
                 throw new Exception('Aucun identifiant envoyé');
+            }
+        }
+
+        //Ajout d'un commentaire
+        if ($_GET['action'] == 'addComment') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                if (!empty($_POST['comment'])) {
+                    $controlleruser = new ControllerUser();
+                    $addcomment = $controlleruser->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
+                }else {
+                    // Autre exception
+                    throw new Exception('Tous les champs ne sont pas remplis !');
+                }
+            }else {
+                // Autre exception
+                throw new Exception('Aucun identifiant de billet envoyé');
             }
         }
 
