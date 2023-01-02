@@ -74,6 +74,31 @@ class ControllerAdmin
 	   }
     }
 
+    //Récupère les nouveaux commentaires
+    public function getCommentAdmin() 
+    {
+        $commentsManager = new CommentManager();
+        $comments = $commentsManager->getCommentSignal($_GET['moderation']);
+
+        require ('view/backend/moderCommentAdmin.php');
+    }
+
+    //Approuve les nouveaux commentaires
+    public function approveComment($commentId) 
+    {
+        $commentsManager = new CommentManager();
+        $approve = $commentsManager->deSignal($commentId);
+
+        if ($approve === false)
+        {
+            throw new \Exception('Impossible d\'approuver le commentaire!');
+        }
+        else
+        {
+            header('Location: index.php?action=getCommentAdmin&moderation=1');
+        }
+    }
+
    
 
 

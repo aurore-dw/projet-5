@@ -188,6 +188,34 @@ try
             }
         }
 
+        //Récupère et affiche les nouveaux commentaires dans l'Admin
+        if ($_GET['action'] == 'getCommentAdmin'){
+            if (!isset($_SESSION['droits']) || ($_SESSION['droits'] == 0)){ 
+            ////Condition de sécurité pour éviter d'accéder à l'interface Admin par l'URL
+                header('Location: index.php');
+            }else{
+                if (isset($_GET['moderation']) && $_GET['moderation'] == '1'){
+                    $controlleradmin = new ControllerAdmin();
+                    $comments = $controlleradmin->getCommentAdmin($_GET['moderation']);
+                }
+            }
+        }
+
+        //Approuve nouveau commentaire Admin
+        if ($_GET['action'] == 'approveComment'){
+            if (!isset($_SESSION['droits']) || ($_SESSION['droits'] == 0)){ 
+            ////Condition de sécurité pour éviter d'accéder à l'interface Admin par l'URL
+                header('Location: index.php');
+            }else{
+                if ((isset($_GET['id'])) && (!empty($_GET['id']))){
+                    $controlleradmin = new ControllerAdmin();
+                    $approve = $controlleradmin->approveComment($_GET['id']);
+                }else{
+                    throw new Exception('Erreur de modération du commentaire !');
+                }
+            }
+        }
+
 	
 
 }else { //Si aucune action, affiche la page d'accueil 
