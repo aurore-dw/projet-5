@@ -90,4 +90,21 @@ class ControllerUser
         require('view/frontend/articleView.php');
     }
 
+    //Ajout commentaire
+    public function addComment($idArticle, $author, $comment) 
+    {
+        $commentManager = new CommentManager();
+        $content = htmlspecialchars($comment);
+        $affectedLines = $commentManager->postComment($idArticle, $_SESSION['user_id'], $content);
+
+        if ($affectedLines === false)
+        { //Si le commentaire n'arrive pas à la bdd
+            throw new \Exception('Impossible d\'ajouter ce commentaire !'); // On arrête le script avec un die   
+        }
+        else
+        {
+            header('Location: index.php?action=affArticle&id=' . $idArticle); // Sinon retour à l'article 
+        }
+    }
+
 }
