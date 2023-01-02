@@ -142,6 +142,19 @@ try
             }
         }
 
+        //Suppression article et ses commentaires Admin
+        if ($_GET['action'] == 'suppArticle') {
+            if(!isset($_SESSION['droits']) || ($_SESSION['droits'] == 0)){
+                header('Location: index.php');
+            }else{
+                if ((isset($_GET['id'])) && (!empty($_GET['id']))) {
+                    $controlleradmin = new ControllerAdmin();
+                    $supprimer = $controlleradmin->suppArticle($_GET['id']);
+
+                }
+            }
+        }
+
         //Affiche la liste complète des articles User
         if ($_GET['action'] == 'listAllArticles') {
             $allArticles = new ControllerUser;
