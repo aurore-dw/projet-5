@@ -52,6 +52,17 @@ class PostManager extends Manager
 		return $artOk;
 	}
 
+	//Supprime un article et ses commentaires (Admin)
+	public function deletArticle($dataId) 
+	{ 
+        $db = $this->dbConnect();
+        $comment = $db->prepare('DELETE FROM comments WHERE comment_id = ?');
+        $comment->execute([$dataId]);
+        $req = $db->prepare('DELETE FROM posts WHERE post_id = ?');
+        $req->execute(array($dataId));
+       	
+    }
+
 	//Reccupère tous les articles pour les afficher dans la vue (User)
 	public function getAllArticles()
 	{

@@ -60,6 +60,20 @@ class ControllerAdmin
 	   }
     }
 
+    //Suppression d'un post et ses commentaires
+    public function suppArticle($dataId) 
+    {	
+
+	   $supprime = new PostManager();
+	   $deletedArticle = $supprime->deletArticle($dataId);
+	
+	   if($deletedArticle === false) {
+		  die('<p style= "border: 1px solid red; text-align: center; font-size: 55px; margin: 90px 90px 90px;">Impossible de supprimer un chapitre.</p>');
+	   }else{
+		  header('Location: index.php?action=listArticlesAdmin');
+	   }
+    }
+
    
 
 
