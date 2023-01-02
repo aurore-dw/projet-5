@@ -78,4 +78,16 @@ class ControllerUser
         require('view/frontend/listArticlesView.php');
     }
 
+    //Reccupération d'un post et de ses commentaires
+    public function affArticle()
+    {
+        $postManager = new PostManager();
+        $commentManager = new CommentManager();
+
+        $post = $postManager->getArticleUser($_GET['id']);
+        $comments = $commentManager->getComments($_GET['id']);
+
+        require('view/frontend/articleView.php');
+    }
+
 }

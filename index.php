@@ -161,6 +161,16 @@ try
             $all = $allArticles->listAllArticles();
         }
 
+        //Affiche un article et ses commentaires
+        if ($_GET['action'] == 'affArticle'){
+            if (isset($_GET['id']) && $_GET['id'] > 0){
+                $artic = new ControllerUser();
+                $affichageArticle = $artic->affArticle($_GET['id']);
+            }else{
+                throw new Exception('Aucun identifiant envoyé');
+            }
+        }
+
 	
 
 }else { //Si aucune action, affiche la page d'accueil 

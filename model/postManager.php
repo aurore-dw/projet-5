@@ -73,4 +73,16 @@ class PostManager extends Manager
 
 	}
 
+	// Récupération article et ses commentaires (User) 
+	public function getArticleUser($idArticle) 
+	{
+		
+		$db = $this->dbConnect();
+		$req = $db->prepare('SELECT post_id, title, chapo, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') FROM posts WHERE post_id = ?');
+		$req->execute(array($idArticle));
+		$article = $req->fetch();
+
+		return $article;
+	}
+
 }
