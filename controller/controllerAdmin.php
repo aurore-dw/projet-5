@@ -26,7 +26,7 @@ class ControllerAdmin
 	   if($article === false) {
 		  die('<p style= "border: 1px solid red; text-align: center; font-size: 55px; margin: 90px 90px 90px;">Impossible d \'ajouter un chapitre.');//Condition si false on arrête le script
 	   }else{//Si true chargement de la page qui affichera la liste des articles
-		  header('Location: index.php');
+		  header('Location: index.php?action=listArticlesAdmin');
 	   }
     }
 
