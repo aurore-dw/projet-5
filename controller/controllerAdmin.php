@@ -7,6 +7,7 @@ require 'vendor/autoload.php';
 use Models\MembersManager;
 use Models\Manager;
 use Models\PostManager;
+use Models\CommentManager;
 
 class ControllerAdmin
 {
@@ -42,7 +43,7 @@ class ControllerAdmin
     public function chapitAdmin() 
     { 	
 	   $postManager = new PostManager();
-	   $post = $postManager->getArticle($_GET['id']);
+	   $post_admin = $postManager->getArticle($_GET['id']);
 	
 	   require('view/backend/editArticleAdmin.php');
     }
@@ -114,5 +115,10 @@ class ControllerAdmin
             header('Location: index.php?action=getCommentAdmin&moderation=1');
         }
     }
+
+
+
+
+
 	
 }
