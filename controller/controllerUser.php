@@ -7,6 +7,7 @@ require 'vendor/autoload.php';
 use Models\Manager;
 use Models\MembersManager;
 use Models\PostManager;
+use Models\CommentManager;
 
 class ControllerUser
 {
