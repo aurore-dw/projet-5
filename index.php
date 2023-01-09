@@ -65,6 +65,17 @@ try
             $contact = $display->displConnexion(); 
         }
 
+        //Connexion
+        if ($_GET['action'] == 'connexion') {
+                if(!empty($_POST['username']) AND !empty($_POST['password'])){
+                    $connex = new ControllerUser();
+                    $newconnex = $connex->connexion($_POST['username'], $_POST['password']); 
+                    $username = htmlspecialchars($_POST['username']);
+                }else{
+                    echo '<p style= "border: 1px solid red; text-align: center; font-size: 25px; margin: 90px 90px 90px;">Tous les champs doivent-être remplis!</p>';
+                }   
+        }
+
         //Deconnexion
          if ($_GET['action'] == 'deconnexion') {
         $deconnex = new ControllerUser();

@@ -10,7 +10,12 @@ use Models\PostManager;
 
 class ControllerUser
 {
-	
+	//Affichage formulaire de connexion
+    public function displConnexion() 
+    {
+        require('view/frontend/signin.php');
+    }
+    
     // Affichage formulaire d'inscription
     public function displFormulContact() 
     {
